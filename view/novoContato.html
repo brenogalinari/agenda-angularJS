@@ -1,0 +1,25 @@
+<a class="btn btn-default btn-margin" href="#/contatos">Voltar</a>
+<form name=contatoForm>
+	<input class="form-control" type="text" ng-model='contato.nome' placeholder="Nome" ng-required='true' name="nome" ng-minLength='10'>
+	<input class="form-control" type="text" ng-model='contato.telefone' placeholder="Telefone" ng-required='true' name="telefone" ng-pattern="/^\d{4,5}-\d{4}$/" ui-telefone />
+	<input type="text" class="form-control" ng-model="contato.data" name="data" placeholder="Data" ui-date />
+	<select class="form-control" ng-model="contato.operadora" ng-options="operadora.nome group by operadora.categoria for operadora in operadoras track by operadora._id">
+		<option value="">Selecione uma operadora</option>
+	</select>
+
+	<div class="alert alert-danger" ng-show='contatoForm.nome.$error.required && contatoForm.nome.$dirty'>
+		Por favor, Preencha o campo nome!
+	</div>
+	<div class="alert alert-danger" ng-show='contatoForm.nome.$error.minlength'>
+		O campo nome deve ter no mínimo 10 caracteres!
+	</div>
+	<div class="alert alert-danger" ng-show='contatoForm.telefone.$error.require && contatoForm.telefone.$dirty'>
+		Por favor, Preencha o campo telefone!
+	</div>
+	<div class="alert alert-danger" ng-show='contatoForm.telefone.$error.pattern'>
+		O campo telefone deve ter o formato ddddd-dddd
+	</div>
+	<button type="button" class="btn btn-primary btn-block" ng-click='adicionarContato(contato)' ng-disabled="contatoForm.$invalid">
+	Adicionar Contato
+	</button>
+</form>
